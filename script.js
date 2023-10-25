@@ -3,37 +3,52 @@ var jsonData = [
         "category": "ҰБТ",
         "title": "Биология-Химия",
         "date": "Қаңтар 15, 2024",
-        "image": "https://d19m59y37dris4.cloudfront.net/directory/2-0-2/img/photo/photo-1512917774080-9991f1c4c750.jpg",
+        "image": "img/download.jpg",
         "description": "Болашақ медицина мамандарына арналған курс."
     },
     {
         "category": "ҰБТ",
         "title": "Информатика-Математика",
         "date": "Қаңтар 15, 2024",
-        "image": "https://d19m59y37dris4.cloudfront.net/directory/2-0-2/img/photo/photo-1522771739844-6a9f6d5f14af.jpg",
+        "image": "img/download.jpg",
         "description": "Болашақ IT мамандарына арналған курс."
     },
     {
         "category": "ҰБТ",
         "title": "Математика-Физика",
         "date": "Қаңтар 15, 2024",
-        "image": "https://d19m59y37dris4.cloudfront.net/directory/2-0-2/img/photo/photo-1482463084673-98272196658a.jpg",
+        "image": "img/download.jpg",
         "description": "Болашақ техникалық мамандарына арналған курс."
     },
     {
         "category": "ҰБТ",
-        "title": "Математика-География",
+        "title": "Математика-Физика",
         "date": "Қаңтар 15, 2024",
-        "image": "https://d19m59y37dris4.cloudfront.net/directory/2-0-2/img/photo/photo-1522771739844-6a9f6d5f14af.jpg",
-        "description": "Болашақ бизнес мамандарына арналған курс."
+        "image": "img/download.jpg",
+        "description": "Болашақ техникалық мамандарына арналған курс."
     },
     {
-        "category": "НИШ",
-        "title": "Логика",
+        "category": "ҰБТ",
+        "title": "Математика-Физика",
         "date": "Қаңтар 15, 2024",
-        "image": "https://d19m59y37dris4.cloudfront.net/directory/2-0-2/img/photo/photo-1522771739844-6a9f6d5f14af.jpg",
-        "description": "Болашақ НИШ оқушыларына арналған курс."
+        "image": "img/download.jpg",
+        "description": "Болашақ техникалық мамандарына арналған курс."
     },
+    {
+        "category": "ҰБТ",
+        "title": "Математика-Физика",
+        "date": "Қаңтар 15, 2024",
+        "image": "img/download.jpg",
+        "description": "Болашақ техникалық мамандарына арналған курс."
+    },
+    {
+        "category": "ҰБТ",
+        "title": "Математика-Физика",
+        "date": "Қаңтар 15, 2024",
+        "image": "img/download.jpg",
+        "description": "Болашақ техникалық мамандарына арналған курс."
+    },
+
 ];
 
 function createBlogCard(data) {
@@ -66,3 +81,30 @@ function addBlogCardsToPage(data) {
 }
 
 addBlogCardsToPage(jsonData);
+
+
+// 
+var showAll = false; 
+var jsonDataLength = jsonData.length; 
+
+var maxItemsToShow = 6; 
+function updateBlogCards() {
+    var container = document.getElementById("blogContainer");
+    var row = container.querySelector(".row");
+    row.innerHTML = ""; 
+
+    var itemsToShow = showAll ? jsonDataLength : Math.min(maxItemsToShow, jsonDataLength);
+
+    for (var i = 0; i < itemsToShow; i++) {
+        var cardHtml = createBlogCard(jsonData[i]);
+        row.innerHTML += cardHtml;
+    }
+}
+
+var toggleButton = document.getElementById("toggleButton");
+toggleButton.addEventListener("click", function() {
+    showAll = !showAll; 
+    updateBlogCards(); 
+});
+
+updateBlogCards();

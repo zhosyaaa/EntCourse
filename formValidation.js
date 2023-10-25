@@ -1,14 +1,11 @@
 function validateForm(event) {
-    event.preventDefault(); // Предотвращаем отправку формы
-
-    // Получаем ссылки на обязательные поля
+    event.preventDefault();
     var contactName = document.getElementById("contactName");
     var contactSurname = document.getElementById("contactSurname");
     var contactNumber = document.getElementById("contactNumber");
     var contactEmail = document.getElementById("contactEmail");
     var contactMessage = document.getElementById("contactMessage");
 
-    // Проверка обязательных полей
     if (contactName.value.trim() === "") {
         alert("Өтінемін, Атыңызды жазыңыз!");
         return;
@@ -34,9 +31,7 @@ function validateForm(event) {
         return;
     }
     
-    // Если все поля заполнены, можно отправить форму
     document.querySelector(".contactForm").submit();
 }
 
-// Назначаем функцию validateForm на событие отправки формы
 document.querySelector(".contactForm").addEventListener("submit", validateForm);
