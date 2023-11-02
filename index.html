@@ -35,6 +35,18 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex  order-lg-0">
+        <button type="button" class="btn btn-primary" id="openModalButton">
+            Вход 
+        </button>
+        <div style="margin-left: 10px; margin-right: 10px;"></div> 
+        <button type="button" class="btn btn-primary" id="openModalButton2">
+            Регистрация
+        </button>
+        <li style="list-style-type: none;">
+          <a class="nav-link" id="userEmail" style="display: none; color: black;"></a>
+        </li>
+      </div>
     </div>
   </nav>
 
@@ -211,6 +223,202 @@
     <p class="text-center text-body-secondary">© 2023 Company, Inc</p>
   </footer>
 </div>
+
+<!--  -->
+<!-- вход -->
+<div id="loginModal" class="modal">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Кіру</h5>
+              <button type="button" class="close" id="closeModalButton">&times;</button>
+          </div>
+          <div class="modal-body">
+              <form id="loginForm">
+                  <div class="form-group">
+                      <label for="email">Email</label>
+                      <input type="email" class="form-control" id="email" placeholder="Почтаңызды жазыңыз.">
+                  </div>
+                  <div class="form-group">
+                      <label for="password">Құпия сөз</label>
+                      <input type="password" class="form-control" id="password" placeholder="Құпия сөзді жазыңыз.">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Кіру</button>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var openModalButton = document.getElementById("openModalButton");
+  var closeModalButton = document.getElementById("closeModalButton");
+  var loginModal = document.getElementById("loginModal");
+  var loginForm = document.getElementById("loginForm");
+
+  openModalButton.addEventListener("click", function () {
+      loginModal.style.display = "block";
+  });
+
+  closeModalButton.addEventListener("click", function () {
+      loginModal.style.display = "none";
+  });
+
+  window.addEventListener("click", function (event) {
+      if (event.target === loginModal) {
+          loginModal.style.display = "none";
+      }
+  });
+
+  loginForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      const userData = {
+          email: email,
+          password: password,
+      };
+
+      console.log("test message");
+      console.log(email, password);
+
+      fetch("http://localhost:8080/api/login", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+      })
+      .then((response) => {
+          if (response.ok) {
+              console.log("okkk")
+              return response.text();
+          } else {
+              throw new Error("Ошибка HTTP: " + response.status);
+          }
+      })
+      .then((data) => {
+          console.log(data);
+      })
+      .catch((error) => {
+          console.error("Произошла ошибка:", error);
+      });
+
+      document.getElementById("userEmail").textContent = email;
+      document.getElementById("userEmail").style.display = "block";
+      document.getElementById("openModalButton").style.display = "none";
+      document.getElementById("openModalButton2").style.display = "none";
+      loginModal.style.display = "none"; 
+  });
+});
+</script>
+
+<!-- регистрация -->
+<div id="signInModal" class="modal">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Тіркелу</h5>
+              <button type="button" class="close" id="closeModalButton2">&times;</button>
+          </div>
+          <div class="modal-body">
+              <form>
+                  <div class="form-group">
+                      <label for="email">Email</label>
+                      <input type="email" class="form-control" id="email2" placeholder="Почтаңызды жазыңыз.">
+                  </div>
+                  <div class="form-group">
+                      <label for="fullname">Аты Жөніңіз</label>
+                      <input type="text" class="form-control" id="fullname2" placeholder="Аты Жөніңізді жазыңыз.">
+                  </div>
+                  <div class="form-group">
+                      <label for="phoneNumber">Номер</label>
+                      <input type="text" class="form-control" id="phoneNumber2" placeholder="Номеріңізді жазыңыз.">
+                  </div>
+                  <div class="form-group">
+                      <label for="password">Құпия сөз</label>
+                      <input type="password" class="form-control" id="password2" placeholder="Құпия сөзді жазыңыз.">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Тіркелу</button>
+              </form>
+              
+          </div>
+      </div>
+  </div>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+  var openModalButton = document.getElementById("openModalButton2");
+  var closeModalButton = document.getElementById("closeModalButton2");
+  var loginModal = document.getElementById("signInModal");
+  var registerForm = document.querySelector("#signInModal form");
+
+  openModalButton.addEventListener("click", function () {
+      loginModal.style.display = "block";
+  });
+
+  closeModalButton.addEventListener("click", function () {
+      loginModal.style.display = "none";
+  });
+
+  window.addEventListener("click", function (event){
+      if (event.target === loginModal) {
+          loginModal.style.display = "none";
+      }
+  });
+
+  registerForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const email = document.getElementById("email2").value;
+      const fullname = document.getElementById("fullname2").value;
+      const phoneNumber = document.getElementById("phoneNumber2").value;
+      const password = document.getElementById("password2").value;
+
+      const userData = {
+          email: email,
+          fullname: fullname,
+          phoneNumber: phoneNumber,
+          password: password,
+      };
+
+      console.log("test message");
+      console.log(email, password, phoneNumber, fullname);
+
+      fetch("http://localhost:8080/api/register", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+      })
+      .then((response) => {
+          if (response.ok) {
+              return response.text();
+          } else {
+              throw new Error("Ошибка HTTP: " + response.status);
+          }
+      })
+      .then((data) => {
+          console.log(data);
+      })
+      .catch((error) => {
+          console.error("Произошла ошибка:", error);
+      });
+
+      document.getElementById("userEmail").textContent = email;
+      document.getElementById("userEmail").style.display = "block";
+      document.getElementById("openModalButton").style.display = "none";
+      document.getElementById("openModalButton2").style.display = "none";
+      loginModal.style.display = "none";
+  });
+});
+</script>
+
+
+<!--  -->
+
 
 
 
