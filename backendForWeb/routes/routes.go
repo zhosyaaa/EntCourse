@@ -19,5 +19,7 @@ func (r *Routes) SetupAPIRoutes(router *gin.Engine) {
 		api.GET("/users", r.controller.GetPersons)
 		api.POST("/register", r.controller.CreatePerson)
 		api.POST("/login", r.controller.Login)
+		api.PUT("/update/:id", r.controller.UpdateUser)
+		api.DELETE("delete/:id", r.controller.DeleteUser)
 	}
 }

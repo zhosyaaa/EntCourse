@@ -21,7 +21,7 @@ func (ur *UserRepository) GetAllPersons() ([]models.User, error) {
 	return users, nil
 }
 
-func (ur *UserRepository) GetPersonByID(id uint) (*models.User, error) {
+func (ur *UserRepository) GetPersonByID(id string) (*models.User, error) {
 	var user models.User
 	if err := ur.db.First(&user, id).Error; err != nil {
 		return nil, err
@@ -39,4 +39,17 @@ func (ur *UserRepository) GetPersonByEmail(email string) (*models.User, error) {
 		return nil, err
 	}
 	return &user, nil
+}
+
+func (ur *UserRepository) UpdateUser(user *models.User) (*models.User, error) {
+	if err := ur.db.Save(user).Error; err != nil {
+		return nil, err
+	}
+	return user, nil
+}
+func (ur *UserRepository) DeleteUser(user *models.User) error {
+	if err := ur.db.Delete(user).Error; err != nil {
+		return err
+	}
+	return nil
 }

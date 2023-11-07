@@ -4,41 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="main.css" rel="stylesheet">
+    <script src="userEmail.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>Document</title>
 </head>
+<style>
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-content {
+    max-width: 100%;
+    max-height: 80%;
+    margin: auto;
+    display: block;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #ffffff;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+</style>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
-        <div class="container">
-            <a class="navbar-brand" href="./overview.html">
-              YBT.
-          </a>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mx-auto">
-              <li class="nav-item dropdown">
-                <a class="nav-link" href="index.html">Басты бет</a>
-      
-              </li>
-              <li class="nav-item dropdown position-static">
-                <a class="nav-link"  href="signup.html">Жазылу</a>
-      
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link" href="course.html">Курстар</a>
-              </li>
-            
-              <li class="nav-item">
-                <a class="nav-link"  href="teachers.html">Мұғалімдер</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container">
+        <a class="navbar-brand" href="./overview.html">
+          YBT.
+      </a>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="index.html">Басты бет</a>
+  
+          </li>
+          <li class="nav-item dropdown position-static">
+            <a class="nav-link"  href="signup.html">Жазылу</a>
+  
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="course.html">Курстар</a>
+          </li>
+        
+          <li class="nav-item">
+            <a class="nav-link"  href="teachers.html">Мұғалімдер</a>
+          </li>
+        </ul>
+      </div>
+      <div class="d-flex  order-lg-0">
+        <button type="button" class="btn btn-primary" id="openModalButton">
+            Кіру 
+        </button>
+        <div style="margin-left: 10px; margin-right: 10px;"></div> 
+        <button type="button" class="btn btn-primary" id="openModalButton2">
+            Жазылу
+        </button>
+        <li style="list-style-type: none;">
+          <a class="nav-link" id="userEmail" style="display: none; color: black;"></a>
+        </li>
+        <button id="logoutButton" onclick="logout()" class="btn btn-primary">Шығу</button>
 
-
+      </div>
+    </div>
+  </nav>
       <div class="row justify-content-center">
-              
         <div class="col-12 col-md-10 col-lg-8 text-center">
          <img src="img/21fdbecc0304433ef38dd5efce396229.jpg" class="img-fluid" style="max-width: 100%;">
          <h2 class="fw-bold">
@@ -47,21 +85,62 @@
          <p class="fs-lg text-body-secondary mb-7 mb-md-9">
             Біздің курстар:
          </p>
-
        </div>
      </div>
+     <div class="container">
+      <div id="filters" class="row mb-3">
+          <div class="col-md-6">
+              <label for="categoryFilter">Категория:</label>
+              <select id="categoryFilter" onchange="filterProducts()" class="form-control">
+                  <option value="">-</option>
+                  <option value="ҰБТ">ҰБТ</option>
+                  <option value="НИШ">НИШ</option>
+              </select>
+          </div>
+          <div class="col-md-6">
+              <label for="priceFilter">Бағасы:</label>
+              <select id="priceFilter" onchange="filterProducts()" class="form-control">
+                  <option value="">-</option>
+                  <option value="0-4900">5000теңгеге дейін</option>
+                  <option value="5000-7900">5000тг - 8000тг</option>
+                  <option value="8000-20000">8000+</option>
+              </select>
+            </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-12 text-center">
+            <button id="searchButton"   onclick="applyFilter()" class="btn btn-primary">Іздеу!</button>
+        </div>
+    </div>
+  </div>
+  
+     <div id="imageModal" class="modal">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <img class="modal-content" id="modalImage">
+    </div>
 
     <div class="container" id="blogContainer">
         <div class="row">
         </div>
     </div>
 
-    <div class="container" id="blogContainer">
-      <div class="row"></div>
-      <button id="toggleButton" class="btn btn-primary mt-3">Толығырақ</button>
-  </div>
-  
-
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10 col-lg-8 text-center">
+       <h2 class="fw-bold">Төлем</h2>
+       <table class="table table-bordered" id="cartItems">
+        <thead>
+          <tr>
+            <th>Курс аты</th>
+            <th>Бағасы</th>
+            <th>?</th>
+          </tr>
+        </thead>
+      </table>
+      <p id="cartTotal"></p>
+      <button onclick="checkout()">Төлем жасау</button>
+     </div>
+   </div>
+    
     <script src="script.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 

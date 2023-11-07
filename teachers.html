@@ -4,37 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="main.css" rel="stylesheet">
+    <script src="userEmail.js"></script>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>Document</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
-        <div class="container">
-            <a class="navbar-brand" href="./overview.html">
-              YBT.
-          </a>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mx-auto">
-              <li class="nav-item dropdown">
-                <a class="nav-link" data-bs-toggle="dropdown" href="index.html">Басты бет</a>
-      
-              </li>
-              <li class="nav-item dropdown position-static">
-                <a class="nav-link" data-bs-toggle="dropdown" href="signup.html">Жазылу</a>
-      
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link" data-bs-toggle="dropdown" href="#">Курстар</a>
-              </li>
-            
-              <li class="nav-item">
-                <a class="nav-link" href="docs/getting-started.html">Мұғалімдер</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container">
+        <a class="navbar-brand" href="./overview.html">
+          YBT.
+      </a>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="index.html">Басты бет</a>
+  
+          </li>
+          <li class="nav-item dropdown position-static">
+            <a class="nav-link"  href="signup.html">Жазылу</a>
+  
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="course.html">Курстар</a>
+          </li>
+        
+          <li class="nav-item">
+            <a class="nav-link"  href="teachers.html">Мұғалімдер</a>
+          </li>
+        </ul>
+      </div>
+      <div class="d-flex  order-lg-0">
+        <button type="button" class="btn btn-primary" id="openModalButton">
+            Кіру 
+        </button>
+        <div style="margin-left: 10px; margin-right: 10px;"></div> 
+        <button type="button" class="btn btn-primary" id="openModalButton2">
+            Жазылу
+        </button>
+        <li style="list-style-type: none;">
+          <a class="nav-link" id="userEmail" style="display: none; color: black;"></a>
+        </li>
+        <button id="logoutButton" onclick="logout()" class="btn btn-primary">Шығу</button>
+
+      </div>
+    </div>
+  </nav>
       <div class="row justify-content-center">
               
         <div class="col-12 col-md-10 col-lg-8 text-center">

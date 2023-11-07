@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"strconv"
 	"webAitu/models"
 	"webAitu/repo"
 )
@@ -64,4 +65,43 @@ func (uc *UserController) Login(c *gin.Context) {
 	} else {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid email or password"})
 	}
+}
+
+func (uc *UserController) DeleteUser(context *gin.Context) {
+	userID := context.Param("id")
+	fmt.Println(userID)
+	user, err := uc.userRepository.GetPersonByID(userID)
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to find user"})
+		return
+	}
+	if err = uc.userRepository.DeleteUser(user); err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"error": "Delete user failed"})
+		return
+	}
+	context.JSON(http.StatusCreated, nil)
+}
+
+func (uc *UserController) UpdateUser(context *gin.Context) {
+	context.Header("Access-Control-Allow-Origin", "*")
+	userID := context.Param("id")
+	var updatedUser models.User
+	parsedID, err := strconv.Atoi(userID)
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
+		return
+	}
+	updatedUser.ID = uint(parsedID)
+	if err := context.ShouldBindJSON(&updatedUser); err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
+		return
+	}
+
+	user, err := uc.userRepository.UpdateUser(&updatedUser)
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update user"})
+		return
+	}
+	context.JSON(http.StatusCreated, user)
+
 }
