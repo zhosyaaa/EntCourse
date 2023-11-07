@@ -81,7 +81,7 @@ function addBlogCardsToPage(data) {
 }
 
 addBlogCardsToPage(jsonData);
-
+// 
 var cart = []; 
 
 function purchaseCourse(courseName, price) {
@@ -143,7 +143,7 @@ function calculateTotalPrice() {
 
 function checkout() {
     if (cart.length === 0) {
-        alert('Сіздің себетіңіз бос. Төлемге кіріспес бұрын ыдыс-аяқ қосыңыз.');
+        alert('Сіздің себетіңіз бос. Төлемге кіріспес бұрын курс қосыңыз.');
         return;
     }
     window.location.href = 'https://kaspi.kz';
@@ -168,8 +168,7 @@ function closeModal() {
 }
 
 // 
-// Create a variable to hold the filtered courses
-var filteredData = jsonData.slice(); // Copy the original data
+var filteredData = jsonData.slice(); 
 
 document.getElementById("applyFilterButton").addEventListener("click", applyFilter);
 
@@ -198,5 +197,4 @@ function applyFilter() {
     addBlogCardsToPage(filteredData);
 }
 
-// Initially, display all cards without any filter
 addBlogCardsToPage(filteredData);

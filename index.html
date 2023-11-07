@@ -248,6 +248,7 @@
                       <label for="password">Құпия сөз</label>
                       <input type="password" class="form-control" id="password" placeholder="Құпия сөзді жазыңыз.">
                   </div>
+                  <br>
                   <button type="submit" class="btn btn-primary">Кіру</button>
               </form>
           </div>
@@ -346,7 +347,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   <div class="form-group">
                       <label for="password">Құпия сөз</label>
                       <input type="password" class="form-control" id="password2" placeholder="Құпия сөзді жазыңыз.">
-                  </div>
+                  </div><br>
                   <button type="submit" class="btn btn-primary">Тіркелу</button>
               </form>
               
@@ -355,23 +356,23 @@ document.addEventListener("DOMContentLoaded", function () {
   </div>
 </div>
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
   var openModalButton = document.getElementById("openModalButton2");
   var closeModalButton = document.getElementById("closeModalButton2");
-  var loginModal = document.getElementById("signInModal");
+  var signInModal = document.getElementById("signInModal");
   var registerForm = document.querySelector("#signInModal form");
 
   openModalButton.addEventListener("click", function () {
-      loginModal.style.display = "block";
+    signInModal.style.display = "block";
   });
 
   closeModalButton.addEventListener("click", function () {
-      loginModal.style.display = "none";
+    signInModal.style.display = "none";
   });
 
   window.addEventListener("click", function (event){
-      if (event.target === loginModal) {
-          loginModal.style.display = "none";
+      if (event.target === signInModal) {
+        signInModal.style.display = "none";
       }
   });
 
@@ -387,10 +388,6 @@ document.addEventListener("DOMContentLoaded", function () {
           phoneNumber: phoneNumber,
           password: password,
       };
-
-      console.log("test message");
-      console.log(email, password, phoneNumber, fullname);
-
       fetch("http://localhost:8080/api/register", {
           method: "POST",
           headers: {
@@ -422,12 +419,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
-<!--  -->
-
-
-
-
-</main>
 <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
