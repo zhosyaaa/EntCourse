@@ -51,33 +51,55 @@ form.addEventListener("submit", validateForm);
 
 // Real-time validation
 document.getElementById("contactName").addEventListener("input", function () {
-    if (!/^[A-Za-z]+$/.test(this.value)) {
-        alert("Өтінемін, Атыңызды тек әріптерден тұратын сөздермен жазыңыз!");
+    if (!/^[A-Za-z]*$/.test(contactName.value)) {
+        contactNameError.textContent = "Өтінемін, Атыңызды тек әріптерден тұратын сөздермен жазыңыз!";
+        contactName.classList.add("error"); 
+    } else {
+        contactNameError.textContent = "";
+        contactName.classList.remove("error"); 
     }
 });
 
 document.getElementById("contactSurname").addEventListener("input", function () {
-    if (!/^[A-Za-z]+$/.test(this.value)) {
-        alert("Өтінемін, Жөніңізді тек әріптерден тұратын сөздермен жазыңыз!");
+    if (!/^[A-Za-z]*$/.test(contactSurname.value)) {
+        contactSurnameError.textContent = "Өтінемін, Жөніңізді тек әріптерден тұратын сөздермен жазыңыз!";
+        contactSurname.classList.add("error"); 
+    } else {
+        contactSurnameError.textContent = "";
+        contactSurname.classList.remove("error"); 
     }
 });
 
 document.getElementById("contactNumber").addEventListener("input", function () {
-    if (!/^\d+$/.test(this.value)) {
-        alert("Өтінемін, номеріңіз тек сандардан тұруы керек!");
+    if (!/^\d+$/.test(contactNumber.value)) {
+        contactNumberError.textContent = "Өтінемін, номеріңіз тек сандардан тұруы керек!";
+        contactNumber.classList.add("error"); 
+    } else {
+        contactNumberError.textContent = "";
+        contactNumber.classList.remove("error"); 
     }
 });
 
 document.getElementById("contactEmail").addEventListener("input", function () {
     if (this.value.trim() === "") {
-        alert("Өтінемін, почтаңызды жазыңыз!");
-    } else if (!isValidEmail(this.value)) {
-        alert("Өтінемін, дұрыс пошта мекенжайын енгізіңіз!");
+        contactEmailError.textContent = "Өтінемін, почтаңызды жазыңыз!";
+        contactEmail.classList.add("error"); 
+    } else if (!isValidEmail(contactEmail.value)) {
+        contactEmailError.textContent = "Өтінемін, дұрыс пошта мекенжайын енгізіңіз!";
+        contactEmail.classList.add("error"); 
+    }else{
+        contactEmailError.textContent = "";
+        contactEmail.classList.remove("error"); 
     }
 });
 
 document.getElementById("contactMessage").addEventListener("input", function () {
     if (this.value.trim() === "") {
-        alert("Өтінемін, таңдау пәндерді жазыңыз!");
+        contactMessageError.textContent = "Өтінемін, таңдау пәндерді жазыңыз!";
+        contactMessage.classList.add("error"); 
+    }else{
+        contactMessageError.textContent = "";
+        contactMessage.classList.remove("error"); 
     }
 });
+
